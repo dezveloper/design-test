@@ -95,10 +95,26 @@
 	</div>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(".scroll-bottom").click(function() {
+		$(document).ready(function(){
+			$(".scroll-bottom").click(function() {
 		    $('html,body').animate({
-		        scrollTop: $(".are-you-block").offset().top},
-		        'slow');
+			        scrollTop: $(".are-you-block").offset().top},
+			        200);
+			});
+			$('html,body').bind('mousewheel', function(e){
+				var doc = document.documentElement;
+				var top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
+		        if(e.originalEvent.wheelDelta /120 > 0) {
+		            $('html,body').animate({
+					        scrollTop: top - $(window).height()},
+					        200);
+		        }
+		        else{
+		            $('html,body').animate({
+					        scrollTop: top + $(window).height()},
+					        200);
+		        }
+		    });
 		});
 	</script>
 </body>
